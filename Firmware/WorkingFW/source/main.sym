@@ -1,0 +1,106 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @SCRATCH
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018-021 RxBuffer
+022-02B TxBuffer
+02C     i
+02D     j
+02E     temp
+02F     PacketStatus
+030     MARCS
+031     PacketLengthTx
+032     FirstByte
+033     TxFIFOBytes
+034     RxFIFOBytes
+035.0   CRC_Ok
+035.1   ForceTx
+036     ToSend
+037     SendStrobe.Strobe
+037     SetRegister.Address
+037-065 CCBurstConfig.ConfReg
+037     MAIN.@SCRATCH1
+038     SetRegister.Value
+038     MAIN.@SCRATCH2
+039     SetRegister.@SCRATCH1
+066     @delay_ms1.P1
+066     CCBurstConfig.@SCRATCH1
+067     RDA_isr.@SCRATCH1
+068     RDA_isr.@SCRATCH2
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB-FBC CCP_2
+FBC     CCP_2_HIGH
+FBE-FBF CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+017A  @delay_ms1
+009E  RDA_isr
+0374  MAIN
+01A2  Blink
+01CC  CCBurstConfig
+02C4  CheckStatus
+032E  CalibrationRoutine
+0166  SendStrobe
+0352  SetRegister
+0374  @cinit
+
+Project Directory:
+    C:\Documents and Settings\Lorenzo\Desktop\TIROCINIO\source\
+
+Project Files:
+    main.c
+    ..\..\..\..\..\PROGRA~1\PICC\devices\18f4620.h
+    header.h
+    cc1101.h
+
+Units:
+    main.c (main)
+
+Compiler Settings:
+    Processor:      PIC18F4620
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX32:      main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.sta

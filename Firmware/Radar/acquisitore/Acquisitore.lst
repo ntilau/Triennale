@@ -1,0 +1,456 @@
+CCS PCH C Compiler, Version 3.221, 16465               03-apr-08 14.59
+
+               Filename: C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.LST
+
+               ROM used: 600 bytes (4%)
+                         Largest free fragment is 15780
+               RAM used: 28 (4%) at main() level
+                         38 (5%) worst case
+               Stack:    3 worst case (1 in main + 2 for interrupts)
+
+*
+0000:  GOTO   019C
+*
+0008:  MOVWF  05
+000A:  MOVFF  FD8,06
+000E:  MOVF   FE9,W
+0010:  MOVWF  07
+0012:  MOVF   FEA,W
+0014:  MOVWF  08
+0016:  MOVF   FE1,W
+0018:  MOVWF  09
+001A:  MOVF   FE2,W
+001C:  MOVWF  0A
+001E:  MOVF   FD9,W
+0020:  MOVWF  0B
+0022:  MOVF   FDA,W
+0024:  MOVWF  0C
+0026:  MOVF   FF3,W
+0028:  MOVWF  14
+002A:  MOVF   FF4,W
+002C:  MOVWF  15
+002E:  MOVF   FE0,W
+0030:  MOVWF  0D
+0032:  MOVLB  0
+0034:  MOVF   00,W
+0036:  MOVWF  0F
+0038:  MOVF   01,W
+003A:  MOVWF  10
+003C:  MOVF   02,W
+003E:  MOVWF  11
+0040:  MOVF   03,W
+0042:  MOVWF  12
+0044:  MOVF   04,W
+0046:  MOVWF  13
+0048:  BTFSS  F9D.5
+004A:  GOTO   0054
+004E:  BTFSC  F9E.5
+0050:  GOTO   00DC
+0054:  MOVF   0F,W
+0056:  MOVWF  00
+0058:  MOVF   10,W
+005A:  MOVWF  01
+005C:  MOVF   11,W
+005E:  MOVWF  02
+0060:  MOVF   12,W
+0062:  MOVWF  03
+0064:  MOVF   13,W
+0066:  MOVWF  04
+0068:  MOVF   0D,W
+006A:  MOVWF  FE0
+006C:  BSF    0D.7
+006E:  MOVF   07,W
+0070:  MOVWF  FE9
+0072:  MOVF   08,W
+0074:  MOVWF  FEA
+0076:  MOVF   09,W
+0078:  MOVWF  FE1
+007A:  MOVF   0A,W
+007C:  MOVWF  FE2
+007E:  MOVF   0B,W
+0080:  MOVWF  FD9
+0082:  MOVF   0C,W
+0084:  MOVWF  FDA
+0086:  MOVF   14,W
+0088:  MOVWF  FF3
+008A:  MOVF   15,W
+008C:  MOVWF  FF4
+008E:  MOVF   05,W
+0090:  MOVFF  06,FD8
+0094:  RETFIE 0
+....................  #include "acquisitore.h" 
+....................  #include <18F2420.h> 
+....................  //////// Standard Header file for the PIC18F2420 device ////////////////  
+.................... #device PIC18F2420  
+.................... #list  
+....................  
+.................... #device adc=12  
+.................... #fuses intrc, nolvp, NOWDT,NOBROWNOUT  
+.................... #use delay(clock=32000000,RESTART_WDT)  
+*
+00AC:  CLRF   FEA
+00AE:  MOVLW  25
+00B0:  MOVWF  FE9
+00B2:  MOVF   FEF,W
+00B4:  BZ    00DA
+00B6:  MOVLW  0A
+00B8:  MOVWF  01
+00BA:  MOVLW  BF
+00BC:  MOVWF  00
+00BE:  CLRWDT
+00C0:  DECFSZ 00,F
+00C2:  BRA    00BE
+00C4:  DECFSZ 01,F
+00C6:  BRA    00BA
+00C8:  MOVLW  5E
+00CA:  MOVWF  00
+00CC:  DECFSZ 00,F
+00CE:  BRA    00CC
+00D0:  NOP   
+00D2:  NOP   
+00D4:  CLRWDT
+00D6:  DECFSZ FEF,F
+00D8:  BRA    00B6
+00DA:  RETLW  00
+.................... #use rs232(stream=rs232, baud=38400, parity=N, xmit=PIN_C6, rcv=PIN_C7, bits=8)  
+....................  
+....................   
+.................... #bit PLL_ENABLE=0xf9b.6  
+....................   
+.................... void DigPot(int dato);  
+.................... void DataTX(long I, long Q);  
+....................   
+.................... int GAIN=0x00,CLUTTER_CANCELLATION=0,i;  
+.................... int head=0xaa;  
+....................   
+....................   
+.................... #int_rda  
+.................... Leggi_RS232()  
+.................... {  
+....................   
+....................    switch ( fgetc(RS232) )  
+....................    {  
+00DC:  BTFSS  F9E.5
+00DE:  BRA    00DC
+00E0:  MOVF   FAE,W
+00E2:  XORLW  67
+00E4:  BZ    00F4
+00E6:  XORLW  0E
+00E8:  BZ    0102
+00EA:  XORLW  0C
+00EC:  BZ    0110
+00EE:  XORLW  06
+00F0:  BZ    0122
+00F2:  BRA    0158
+....................       case 0x67:  
+....................       {  
+....................          GAIN=fgetc(RS232);  
+00F4:  BTFSS  F9E.5
+00F6:  BRA    00F4
+00F8:  MOVFF  FAE,18
+....................          DigPot(GAIN);  
+00FC:  MOVFF  18,25
+0100:  BRA    0096
+....................          //fprintf(rs232,"\n\rGain changed to %U\n\r",gain);  
+....................          break;  
+....................       }  
+....................   
+....................       case 0x69:  
+....................       {  
+....................          if(fgetc(RS232)==0x69)  
+0102:  BTFSS  F9E.5
+0104:  BRA    0102
+0106:  MOVF   FAE,W
+0108:  SUBLW  69
+010A:  BNZ   010E
+....................             Reset_cpu();  
+010C:  RESET
+....................          break;  
+010E:  BRA    015A
+....................       }  
+....................   
+....................       case 0x65:  
+....................       {  
+....................          //fprintf(RS232,"\n\rIPERCONNESSO\n\r");  
+....................          fputc(0x65,RS232);  
+0110:  MOVLW  65
+0112:  BTFSS  F9E.4
+0114:  BRA    0112
+0116:  MOVWF  FAD
+....................          fputc(0x65,RS232);  
+0118:  MOVLW  65
+011A:  BTFSS  F9E.4
+011C:  BRA    011A
+011E:  MOVWF  FAD
+....................          break;  
+0120:  BRA    015A
+....................       }  
+....................   
+....................       case 0x63:  
+....................       {  
+....................          CLUTTER_CANCELLATION=fgetc(RS232);  
+0122:  BTFSS  F9E.5
+0124:  BRA    0122
+0126:  MOVFF  FAE,19
+....................          switch ( CLUTTER_CANCELLATION )  
+....................          {  
+012A:  MOVF   19,W
+012C:  XORLW  00
+012E:  BZ    013A
+0130:  XORLW  FF
+0132:  BZ    0140
+0134:  XORLW  F0
+0136:  BZ    0146
+0138:  BRA    0156
+....................             case 0x00:  
+....................             {  
+....................                output_low(pin_b5);     //disabilita la soppressione di clutter  
+013A:  BCF    F93.5
+013C:  BCF    F8A.5
+....................                //fprintf(rs232,"\n\rClutter cancellation inhibited\n\r",gain);  
+....................                break;  
+013E:  BRA    0158
+....................             }  
+....................   
+....................             case 0xff:  
+....................             {  
+....................                output_high(pin_b5);    //abilita la soppressione di clutter  
+0140:  BCF    F93.5
+0142:  BSF    F8A.5
+....................                //fprintf(rs232,"\n\rClutter cancellation available\n\r",gain);  
+....................                break;  
+0144:  BRA    0158
+....................             }  
+....................   
+....................             case 0x0f:  
+....................             {  
+....................   
+....................                output_low(pin_b5);  
+0146:  BCF    F93.5
+0148:  BCF    F8A.5
+....................                delay_ms(50);  
+014A:  MOVLW  32
+014C:  MOVWF  25
+014E:  RCALL  00AC
+....................                output_high(pin_b5);  
+0150:  BCF    F93.5
+0152:  BSF    F8A.5
+....................                //fprintf(rs232,"\n\rClutter cancellation toggle\n\r",gain);  
+....................                break;  
+0154:  BRA    0158
+....................             }  
+....................   
+....................             default:  
+....................             {  
+....................   
+....................             }  
+....................             break;  
+0156:  BRA    0158
+....................   
+....................          }  
+....................   
+....................       }  
+....................   
+....................       default:  
+....................       {  
+....................   
+....................       }  
+....................       break;  
+0158:  BRA    015A
+....................   
+....................    }  
+....................   
+....................   
+.................... }  
+....................   
+015A:  BCF    F9E.5
+015C:  GOTO   0054
+.................... void main()  
+.................... {  
+*
+019C:  CLRF   FF8
+019E:  BCF    FD0.7
+01A0:  BSF    0D.7
+01A2:  CLRF   FEA
+01A4:  CLRF   FE9
+01A6:  MOVF   FC1,W
+01A8:  ANDLW  C0
+01AA:  IORLW  0F
+01AC:  MOVWF  FC1
+01AE:  MOVLW  07
+01B0:  MOVWF  FB4
+01B2:  MOVF   FB4,W
+01B4:  BCF    FA1.6
+01B6:  BCF    FB8.3
+01B8:  MOVLW  0C
+01BA:  MOVWF  FAF
+01BC:  MOVLW  22
+01BE:  MOVWF  FAC
+01C0:  MOVLW  90
+01C2:  MOVWF  FAB
+01C4:  CLRF   18
+01C6:  CLRF   19
+01C8:  MOVLW  AA
+01CA:  MOVWF  1B
+....................   
+....................    enable_interrupts(INT_RDA);  
+01CC:  BSF    F9D.5
+....................    enable_interrupts(GLOBAL);  
+01CE:  MOVLW  C0
+01D0:  IORWF  FF2,F
+....................   
+....................   
+....................    setup_adc_ports(AN0_TO_AN1|VSS_Vref);  
+01D2:  MOVF   FC1,W
+01D4:  ANDLW  C0
+01D6:  IORLW  1D
+01D8:  MOVWF  FC1
+....................    setup_adc(ADC_CLOCK_INTERNAL|ADC_TAD_MUL_0);  
+01DA:  MOVF   FC0,W
+01DC:  ANDLW  C0
+01DE:  IORLW  07
+01E0:  MOVWF  FC0
+01E2:  BSF    FC0.7
+01E4:  BSF    FC2.0
+....................    setup_oscillator(osc_8mhz);  
+01E6:  MOVLW  70
+01E8:  MOVWF  FD3
+....................   
+....................    setup_spi(SPI_MASTER|SPI_H_TO_L|SPI_CLK_DIV_4);  
+01EA:  BCF    FC6.5
+01EC:  BCF    F94.5
+01EE:  BSF    F94.4
+01F0:  BCF    F94.3
+01F2:  MOVLW  30
+01F4:  MOVWF  FC6
+01F6:  MOVLW  40
+01F8:  MOVWF  FC7
+....................    PLL_ENABLE=1;  
+01FA:  BSF    F9B.6
+....................   
+....................    restart_wdt();  
+01FC:  CLRWDT
+....................   
+....................   while(1)  
+....................    {  
+....................   
+....................       long I,Q;  
+....................   
+....................       set_adc_channel(0);  
+01FE:  MOVLW  00
+0200:  MOVWF  01
+0202:  MOVF   FC2,W
+0204:  ANDLW  C3
+0206:  IORWF  01,W
+0208:  MOVWF  FC2
+....................       I=read_adc();  
+020A:  BSF    FC2.1
+020C:  BTFSC  FC2.1
+020E:  BRA    020C
+0210:  MOVFF  FC3,1C
+0214:  MOVFF  FC4,1D
+....................       set_adc_channel(1);  
+0218:  MOVLW  04
+021A:  MOVWF  01
+021C:  MOVF   FC2,W
+021E:  ANDLW  C3
+0220:  IORWF  01,W
+0222:  MOVWF  FC2
+....................       Q=read_adc();  
+0224:  BSF    FC2.1
+0226:  BTFSC  FC2.1
+0228:  BRA    0226
+022A:  MOVFF  FC3,1E
+022E:  MOVFF  FC4,1F
+....................   
+....................       DataTX(I, Q);  
+0232:  MOVFF  1D,21
+0236:  MOVFF  1C,20
+023A:  MOVFF  1F,23
+023E:  MOVFF  1E,22
+0242:  BRA    0160
+0244:  CLRF   17
+0246:  BTFSC  FF2.7
+0248:  BSF    17.7
+024A:  BCF    FF2.7
+....................       delay_ms(3);  
+024C:  MOVLW  03
+024E:  MOVWF  25
+0250:  RCALL  00AC
+0252:  BTFSC  17.7
+0254:  BSF    FF2.7
+....................       restart_wdt();  
+0256:  CLRWDT
+....................   
+....................    }  
+0258:  BRA    01FE
+....................   
+....................   
+.................... }  
+....................   
+.................... void DigPot(int dato)  
+.................... {  
+025A:  SLEEP 
+....................    output_low(pin_c2);  
+*
+0096:  BCF    F94.2
+0098:  BCF    F8B.2
+....................    spi_write(dato);  
+009A:  MOVF   FC9,W
+009C:  MOVFF  25,FC9
+00A0:  BTFSS  FC7.0
+00A2:  BRA    00A0
+....................    output_high(pin_c2);  
+00A4:  BCF    F94.2
+00A6:  BSF    F8B.2
+....................   
+.................... }  
+00A8:  GOTO   015A (RETURN)
+....................   
+.................... void DataTX(long I, long Q)  
+.................... {  
+....................   
+....................    fputc(head,rs232);  
+*
+0160:  MOVF   1B,W
+0162:  BTFSS  F9E.4
+0164:  BRA    0162
+0166:  MOVWF  FAD
+....................    fputc(make8(I,1),rs232);  
+0168:  MOVFF  21,24
+016C:  MOVF   21,W
+016E:  BTFSS  F9E.4
+0170:  BRA    016E
+0172:  MOVWF  FAD
+....................    fputc(make8(I,0),rs232);  
+0174:  MOVFF  20,24
+0178:  MOVF   20,W
+017A:  BTFSS  F9E.4
+017C:  BRA    017A
+017E:  MOVWF  FAD
+....................    fputc(make8(Q,1),rs232);  
+0180:  MOVFF  23,24
+0184:  MOVF   23,W
+0186:  BTFSS  F9E.4
+0188:  BRA    0186
+018A:  MOVWF  FAD
+....................    fputc(make8(Q,0),rs232);  
+018C:  MOVFF  22,24
+0190:  MOVF   22,W
+0192:  BTFSS  F9E.4
+0194:  BRA    0192
+0196:  MOVWF  FAD
+....................   
+.................... }  
+0198:  GOTO   0244 (RETURN)
+....................   
+....................  
+
+Configuration Fuses:
+   Word  1: 0900   NOIESO NOFCMEN INTRC
+   Word  2: 1E19   NOBROWNOUT NOWDT BORV20 NOPUT WDT32768
+   Word  3: 8300   PBADEN CCP2C1 NOLPT1OSC MCLR RESERVED
+   Word  4: 0081   STVREN NODEBUG NOLVP NOXINST RESERVED
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTC NOWRTB
+   Word  7: 400F   NOEBTR NOEBTRB

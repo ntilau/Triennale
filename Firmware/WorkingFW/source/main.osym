@@ -1,0 +1,48 @@
+_RETURN_
+CCP_1
+CCP_1_LOW
+CCP_1_HIGH
+CCP_2
+CCP_2_LOW
+CCP_2_HIGH
+PSP_DATA
+C1OUT
+C2OUT
+RxBuffer
+TxBuffer
+TxBufferPointer
+RxBufferPointer
+temp
+i
+j
+ChipStatusByte
+Data
+CurrentState
+NextState
+
+Project Directory:
+    C:\Documents and Settings\Lorenzo\Desktop\TIROCINIO\source\
+
+Project Files:
+    main.c
+    header.h
+    ..\..\..\..\..\PROGRA~1\PICC\devices\18f4620.h
+    cc1101.h
+
+Units:
+    main.c (main)
+
+Compiler Settings:
+    Processor:      PIC18F4620
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Output file:    Relocatable
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    Object:      main.o
+    Symbols:     main.osym

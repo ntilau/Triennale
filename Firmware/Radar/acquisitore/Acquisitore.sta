@@ -1,0 +1,33 @@
+
+ROM used: 600 (4%)
+          600 (4%) including unused fragments
+
+          1 Average locations per line
+          11 Average locations per statement
+
+RAM used: 28 (4%) at main() level
+          38 (5%) worst case
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  145    56 100  C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.c
+    6     0   0  C:\Documents and Settings\Lorenzo\Desktop\acquisitore\acquisitore.h
+  358     0   0  C:\Programmi\PICC\devices\18F2420.h
+----- -----
+ 1018   112 Total
+
+Page ROM  %  RAM  Functions:
+---- --- --- ---  ----------
+0     48   4   1  @delay_ms1
+0    132  11   1  Leggi_RS232
+0    192  16   0  main
+0     22   2   1  DigPot
+0     60   5   5  DataTX
+
+ Segment   Used  Free
+---------  ----  ----
+00000-00002     4  0
+00004-00006     0  4
+00008-00094   142  0
+00096-03FFE   454  15780
+

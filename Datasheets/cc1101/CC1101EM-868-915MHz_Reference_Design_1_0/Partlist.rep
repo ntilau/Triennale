@@ -1,0 +1,34 @@
+                    PART LIST                     
+            ==========================            
+
+Ref.        Description                   Value
+
+C1          Capacitor 0805                C_1U_0805_X7R_K_16            
+C41         Capacitor 0402                C_100N_0402_X5R_K_10          
+C51         Capacitor 0402                C_100N_0402_X5R_K_10          
+C81         Capacitor 0402                C_27P_0402_NP0_J_50           
+C91         Capacitor 0402                C_10N_0402_X7R_K_25           
+C101        Capacitor 0402                C_27P_0402_NP0_J_50           
+C111        Capacitor 0402                C_2P2_0402_NP0_C_50           
+C121        Capacitor 0402                C_1P0_0402_NP0_C_50           
+C122        Capacitor 0402                C_1P5_0402_NP0_C_50           
+C123        Capacitor 0402                C_3P3_0402_NP0_C_50           
+C124        Capacitor 0402                C_100P_0402_NP0_J_50          
+C125        Capacitor 0402                C_100P_0402_NP0_J_50          
+C131        Capacitor 0402                C_1P5_0402_NP0_C_50           
+C141        Capacitor 0402                C_10N_0402_X7R_K_25           
+C151        Capacitor 0402                C_220P_0402_NP0_J_50          
+C181        Capacitor 0402                C_220P_0402_NP0_J_50          
+L1          EMI filter bead               L_BEAD_102_0402               
+L121        Inductor 0402                 L_12N_0402_J                  
+L122        Inductor 0402                 L_18N_0402_J                  
+L123        Inductor 0402                 L_12N_0402_J                  
+L124        Inductor 0402                 L_12N_0402_J                  
+L131        Inductor 0402                 L_12N_0402_J                  
+L132        Inductor 0402                 L_18N_0402_J                  
+P1          SMD pinrow socket,.050 spacing SMD_SOCKET_2x10               
+P2          SMD pinrow socket,.050 spacing SMD_SOCKET_2x10               
+P3          Surface-mount SMA, straight   SMA_SMD                       
+R171        Resistor 0402                 R_56K_0402_F                  
+U1          Single chip tranceiver        CC1101                        
+X1          Crystal, HC-49-SMD   	  X_26.000/10/10/10/16          

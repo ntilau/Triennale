@@ -1,0 +1,1226 @@
+CCS PCH C Compiler, Version 4.057, 24293               31-mar-08 18.37
+
+               Filename: main.lst
+
+               ROM used: 1642 bytes (3%)
+                         Largest free fragment is 63890
+               RAM used: 57 (1%) at main() level
+                         105 (3%) worst case
+               Stack:    4 worst case (3 in main + 1 for interrupts)
+
+*
+00000:  GOTO   0374
+*
+00008:  MOVWF  05
+0000A:  MOVFF  FD8,06
+0000E:  MOVFF  FE0,07
+00012:  MOVLB  0
+00014:  MOVFF  FE9,0D
+00018:  MOVFF  FEA,08
+0001C:  MOVFF  FE1,09
+00020:  MOVFF  FE2,0A
+00024:  MOVFF  FD9,0B
+00028:  MOVFF  FDA,0C
+0002C:  MOVFF  FF3,14
+00030:  MOVFF  FF4,15
+00034:  MOVFF  FFA,16
+00038:  MOVFF  00,0F
+0003C:  MOVFF  01,10
+00040:  MOVFF  02,11
+00044:  MOVFF  03,12
+00048:  MOVFF  04,13
+0004C:  BTFSS  F9D.5
+0004E:  GOTO   0058
+00052:  BTFSC  F9E.5
+00054:  GOTO   009E
+00058:  MOVFF  0F,00
+0005C:  MOVFF  10,01
+00060:  MOVFF  11,02
+00064:  MOVFF  12,03
+00068:  MOVFF  13,04
+0006C:  BSF    0E.7
+0006E:  MOVFF  0D,FE9
+00072:  MOVFF  08,FEA
+00076:  MOVFF  09,FE1
+0007A:  MOVFF  0A,FE2
+0007E:  MOVFF  0B,FD9
+00082:  MOVFF  0C,FDA
+00086:  MOVFF  14,FF3
+0008A:  MOVFF  15,FF4
+0008E:  MOVFF  16,FFA
+00092:  MOVF   05,W
+00094:  MOVFF  07,FE0
+00098:  MOVFF  06,FD8
+0009C:  RETFIE 0
+.................... #include <18f4620.h> 
+.................... //////// Standard Header file for the PIC18F4620 device //////////////// 
+.................... #device PIC18F4620 
+.................... #list 
+....................  
+.................... #fuses INTRC_IO,WDT, NOPROTECT, BROWNOUT, MCLR 
+.................... #use delay(clock=16000000) 
+*
+0017A:  CLRF   FEA
+0017C:  MOVLW  66
+0017E:  MOVWF  FE9
+00180:  MOVF   FEF,W
+00182:  BZ    01A0
+00184:  MOVLW  05
+00186:  MOVWF  01
+00188:  CLRF   00
+0018A:  DECFSZ 00,F
+0018C:  BRA    018A
+0018E:  DECFSZ 01,F
+00190:  BRA    0188
+00192:  MOVLW  2E
+00194:  MOVWF  00
+00196:  DECFSZ 00,F
+00198:  BRA    0196
+0019A:  BRA    019C
+0019C:  DECFSZ FEF,F
+0019E:  BRA    0184
+001A0:  RETLW  00
+.................... #use rs232( baud=38400, xmit=PIN_C6, rcv=PIN_C7, bits=8, parity=N) 
+.................... #include "header.h" 
+.................... #include <cc1101.h> 
+.................... // Chipcon 
+.................... // Product = CC1101 
+.................... // Chip version = A   (VERSION = 0x04) 
+.................... // Crystal accuracy = 10 ppm 
+.................... // X-tal frequency = 26 MHz 
+.................... // RF output power = 0 dBm 
+.................... // RX filterbandwidth = 541.666667 kHz 
+.................... // Deviation = 127 kHz 
+.................... // Datarate = 249.938965 kBaud 
+.................... // Modulation = (1) 2-GFSK 
+.................... // Manchester enable = (0) Manchester disabled 
+.................... // RF Frequency = 868.299866 MHz 
+.................... // Channel spacing = 199.951172 kHz 
+.................... // Channel number = 0 
+.................... // Optimization = Sensitivity 
+.................... // Sync mode = (3) 30/32 sync word bits detected 
+.................... // Format of RX/TX data = (0) Normal mode, use FIFOs for RX and TX 
+.................... // CRC operation = (1) CRC calculation in TX and CRC check in RX enabled 
+.................... // Forward Error Correction = (0) FEC disabled 
+.................... // Length configuration = (1) Variable length packets, packet length configured by the first received byte after sync word. 
+.................... // Packetlength = 255 
+.................... // Preamble count = (2)  4 bytes 
+.................... // Append status = 1 
+.................... // Address check = (0) No address check 
+.................... // FIFO autoflush = 1 
+.................... // Device address = 0 
+.................... // GDO0 signal selection = ( 6) Asserts when sync word has been sent / received, and de-asserts at the end of the packet 
+.................... // GDO2 signal selection = (41) CHIP_RDY 
+.................... #define FSCTRL1  0x0C  // Frequency synthesizer control. 
+.................... #define FSCTRL0  0x00  // Frequency synthesizer control. 
+.................... #define FREQ2    0x21  // Frequency control word, high byte. 
+.................... #define FREQ1    0x65  // Frequency control word, middle byte. 
+.................... #define FREQ0    0x6A  // Frequency control word, low byte. 
+.................... #define MDMCFG4  0x2D  // Modem configuration. 
+.................... #define MDMCFG3  0x3B  // Modem configuration. 
+.................... #define MDMCFG2  0x13  // Modem configuration. 
+.................... #define MDMCFG1  0x22  // Modem configuration. 
+.................... #define MDMCFG0  0xF8  // Modem configuration. 
+.................... #define CHANNR   0x00  // Channel number. 
+.................... #define DEVIATN  0x62  // Modem deviation setting (when FSK modulation is enabled). 
+.................... #define FREND1   0xB6  // Front end RX configuration. 
+.................... #define FREND0   0x10  // Front end RX configuration. 
+.................... #define MCSM0    0x18  // Main Radio Control State Machine configuration. 
+.................... #define FOCCFG   0x1D  // Frequency Offset Compensation Configuration. 
+.................... #define BSCFG    0x1C  // Bit synchronization Configuration. 
+.................... #define AGCCTRL2 0xC7  // AGC control. 
+.................... #define AGCCTRL1 0x00  // AGC control. 
+.................... #define AGCCTRL0 0xB0  // AGC control. 
+.................... #define FSCAL3   0xEA  // Frequency synthesizer calibration. 
+.................... #define FSCAL2   0x2A  // Frequency synthesizer calibration. 
+.................... #define FSCAL1   0x00  // Frequency synthesizer calibration. 
+.................... #define FSCAL0   0x1F  // Frequency synthesizer calibration. 
+.................... #define FSTEST   0x59  // Frequency synthesizer calibration. 
+.................... #define TEST2    0x88  // Various test settings. 
+.................... #define TEST1    0x31  // Various test settings. 
+.................... #define TEST0    0x09  // Various test settings. 
+.................... #define FIFOTHR  0x07  // RXFIFO and TXFIFO thresholds. 
+.................... #define IOCFG2   0x29  // GDO2 output pin configuration. 
+.................... #define IOCFG0D  0x06  // GDO0 output pin configuration. Refer to SmartRF® Studio User Manual for detailed pseudo register explanation. 
+.................... #define PKTCTRL1 0x0C  // Packet automation control. 
+.................... #define PKTCTRL0 0x05  // Packet automation control. 
+.................... #define ADDR     0x00  // Device address. 
+.................... #define PKTLEN   0xFF  // Packet length. 
+....................  
+....................  
+.................... // Registri non definiti da SmartRF 
+.................... #define  IOCFG1   0x2E 
+.................... #define  IOCFG0   IOCFG0D 
+.................... #define  SYNC1    0xD3 
+.................... #define  SYNC0    0x91 
+.................... #define  MCSM2    0x07 
+.................... #define  MCSM1    0x30 
+.................... #define  WOREVT1  0x87 
+.................... #define  WOREVT0  0x6B 
+.................... #define  WORCTRL  0xF8 
+.................... #define  RCCTRL1  0x41 
+.................... #define  RCCTRL0  0x00 
+.................... #define  PTEST    0x7F 
+.................... #define  AGCTEST  0x3F 
+....................  
+.................... // spi_write(REGNAME | ACCESSTYPE) 
+.................... #define  WrSg 0x00 // Scrittura singolo reg 
+.................... #define  WrBt 0x40 // Scrittura a burst su reg consecutivi 
+.................... #define  RdSg 0x80 // Lettura singolo reg 
+.................... #define  RdBt 0xC0 // Lettura a burst 
+....................  
+.................... // Indirizzi 
+.................... #define  _IOCFG2   0x00 
+.................... #define  _IOCFG1   0x01 
+.................... #define  _IOCFG0   0x02 
+.................... #define  _FIFOTHR  0x03 
+.................... #define  _SYNC1    0x04 
+.................... #define  _SYNC0    0x05 
+.................... #define  _PKTLEN   0x06 
+.................... #define  _PKTCTRL1 0x07 
+.................... #define  _PKTCTRL0 0x08 
+.................... #define  _ADDR     0x09 
+.................... #define  _CHANNR   0x0A 
+.................... #define  _FSCTRL1  0x0B 
+.................... #define  _FSCTRL0  0x0C 
+.................... #define  _FREQ2    0x0D 
+.................... #define  _FREQ1    0x0E 
+.................... #define  _FREQ0    0x0F 
+.................... #define  _MDMCFG4  0x10 
+.................... #define  _MDMCFG3  0x11 
+.................... #define  _MDMCFG2  0x12 
+.................... #define  _MDMCFG1  0x13 
+.................... #define  _MDMCFG0  0x14 
+.................... #define  _DEVIATN  0x15 
+.................... #define  _MCSM2    0x16 
+.................... #define  _MCSM1    0x17 
+.................... #define  _MCSM0    0x18 
+.................... #define  _FOCCFG   0x19 
+.................... #define  _BSCFG    0x1A 
+.................... #define  _AGCTRL2  0X1B 
+.................... #define  _AGCTRL1  0X1C 
+.................... #define  _AGCTRL0  0X1D 
+.................... #define  _WOREVT1  0X1E 
+.................... #define  _WOREVT0  0X1F 
+.................... #define  _WORCTRL  0X20 
+.................... #define  _FREND1   0X21 
+.................... #define  _FREND0   0X22 
+.................... #define  _FSCAL3   0X23 
+.................... #define  _FSCAL2   0X24 
+.................... #define  _FSCAL1   0X25 
+.................... #define  _FSCAL0   0X26 
+.................... #define  _RCCTRL1  0X27 
+.................... #define  _RCCTRL0  0X28 
+.................... #define  _FSTEST   0X29 
+.................... #define  _PTEST    0X2A 
+.................... #define  _AGCTEST  0X2B 
+.................... #define  _TEST2    0X2C 
+.................... #define  _TEST1    0X2D 
+.................... #define  _TEST0    0X2E 
+....................  
+.................... // Strobes 
+.................... #define  SRES     0X30 
+.................... #define  SFSTXON  0X31 
+.................... #define  SXOFF    0X32 
+.................... #define  SCAL     0X33 
+.................... #define  SRX      0X34 
+.................... #define  STX      0X35 
+.................... #define  SIDLE    0X36 
+....................                        
+.................... #define  SWORD    0X38  
+.................... #define  SPWD     0X39 
+.................... #define  SFRX     0X3A 
+.................... #define  SFTX     0X3B 
+.................... #define  SWORRST  0X3C 
+.................... #define  SNOP     0X3D 
+.................... #define  PATABLE  0X3E 
+.................... #define  TXFIFO   0X3F 
+.................... #define  RXFIFO   0X3F 
+....................  
+.................... #define  PARTNUM  SRES|RdBt 
+.................... #define  VERSION  SFSTXON|RdBt 
+.................... #define  FREQEST  SXOFF|RdBt 
+.................... #define  LQI   SCAL|RdBt 
+.................... #define  RSSI  SRX|RdBt 
+.................... #define  MARCSTATE   STX|RdBt 
+.................... #define  WORTIME1 SIDLE|RdBt 
+.................... #define  WORTIME0 0X37|RdBt 
+.................... #define  PKTSTATUS   SWORD|RdBt 
+.................... #define  VCO_VC_DAC  SPWD|RdBt 
+.................... #define  TXBYTES  SFRX|RdBt 
+.................... #define  RXBYTES  SFTX|RdBt 
+.................... #define  RCCTRL1_STATUS SWORRST|RdBt 
+.................... #define  RCCTRL0_STATUS SNOP|RdBt 
+....................  
+....................  
+.................... // PIC 
+.................... #define  SSPCON1  0xFC6 
+.................... #define  SSPSTAT  0xFC7 
+....................  
+.................... #define  TxLed PIN_B0 
+.................... #define  RxLed PIN_B1 
+.................... #define  SI PIN_C5 
+.................... #define  S0 PIN_C4 
+.................... #define  SCLK   PIN_C3 
+.................... #define  CSn   PIN_C2 
+.................... #define  GDO2  PIN_C1 
+.................... #define  GDO0  PIN_C0 
+....................  
+....................  
+.................... char RxBuffer[10], TxBuffer[10]; 
+.................... char i=0, j=0, temp=0; 
+.................... char PacketStatus=0, MARCS=0, PacketLengthTx=0, FirstByte=0; 
+.................... char TxFIFOBytes=0, RxFIFOBytes=0; 
+.................... short CRC_Ok=FALSE; 
+.................... short ForceTx=FALSE; 
+.................... char ToSend=0; 
+....................  
+.................... void Blink(); 
+.................... void CCBurstConfig(); 
+.................... void InitInfos(); 
+.................... void CheckStatus(); 
+.................... void PrintStatus(); 
+.................... void CalibrationRoutine(); 
+.................... void SendStrobe(char Strobe); 
+.................... void SetRegister(char Address, char Value); 
+....................  
+.................... #INT_RDA 
+.................... void RDA_isr(){  
+....................    temp = getc(); 
+*
+0009E:  BTFSS  F9E.5
+000A0:  BRA    009E
+000A2:  MOVFF  FAE,2E
+....................    /* 
+....................    output_high(TxLed); 
+....................    delay_ms(100); 
+....................    output_low(TxLed); 
+....................    putc(temp); 
+....................    */ 
+....................    if(ToSend==0){ 
+000A6:  MOVF   36,F
+000A8:  BNZ   0128
+....................       switch(temp){ 
+000AA:  MOVF   2E,W
+000AC:  XORLW  AA
+000AE:  BZ    00BE
+000B0:  XORLW  C9
+000B2:  BZ    00D8
+000B4:  XORLW  04
+000B6:  BZ    00F2
+000B8:  XORLW  0E
+000BA:  BZ    010C
+000BC:  BRA    0126
+....................          case 0xAA: 
+....................             PacketLengthTx=5; 
+000BE:  MOVLW  05
+000C0:  MOVWF  31
+....................             TxBuffer[ToSend]=0xAA; 
+000C2:  CLRF   03
+000C4:  MOVF   36,W
+000C6:  ADDLW  22
+000C8:  MOVWF  FE9
+000CA:  MOVLW  00
+000CC:  ADDWFC 03,W
+000CE:  MOVWF  FEA
+000D0:  MOVLW  AA
+000D2:  MOVWF  FEF
+....................             ToSend++; 
+000D4:  INCF   36,F
+....................             break; 
+000D6:  BRA    0126
+....................          case 0x63: 
+....................             PacketLengthTx=2; 
+000D8:  MOVLW  02
+000DA:  MOVWF  31
+....................             TxBuffer[ToSend]=0x63; 
+000DC:  CLRF   03
+000DE:  MOVF   36,W
+000E0:  ADDLW  22
+000E2:  MOVWF  FE9
+000E4:  MOVLW  00
+000E6:  ADDWFC 03,W
+000E8:  MOVWF  FEA
+000EA:  MOVLW  63
+000EC:  MOVWF  FEF
+....................             ToSend++; 
+000EE:  INCF   36,F
+....................             break; 
+000F0:  BRA    0126
+....................          case 0x67: 
+....................             PacketLengthTx=2; 
+000F2:  MOVLW  02
+000F4:  MOVWF  31
+....................             TxBuffer[ToSend]=0x67; 
+000F6:  CLRF   03
+000F8:  MOVF   36,W
+000FA:  ADDLW  22
+000FC:  MOVWF  FE9
+000FE:  MOVLW  00
+00100:  ADDWFC 03,W
+00102:  MOVWF  FEA
+00104:  MOVLW  67
+00106:  MOVWF  FEF
+....................             ToSend++; 
+00108:  INCF   36,F
+....................             break; 
+0010A:  BRA    0126
+....................          case 0x69: 
+....................             PacketLengthTx=2; 
+0010C:  MOVLW  02
+0010E:  MOVWF  31
+....................             TxBuffer[ToSend]=0x69; 
+00110:  CLRF   03
+00112:  MOVF   36,W
+00114:  ADDLW  22
+00116:  MOVWF  FE9
+00118:  MOVLW  00
+0011A:  ADDWFC 03,W
+0011C:  MOVWF  FEA
+0011E:  MOVLW  69
+00120:  MOVWF  FEF
+....................             ToSend++; 
+00122:  INCF   36,F
+....................             break; 
+00124:  BRA    0126
+....................       } 
+....................    } else if(ToSend>0){ 
+00126:  BRA    0160
+00128:  MOVF   36,F
+0012A:  BZ    0160
+....................       if((ToSend+1)==PacketLengthTx){ 
+0012C:  MOVLW  01
+0012E:  ADDWF  36,W
+00130:  SUBWF  31,W
+00132:  BNZ   014C
+....................          TxBuffer[ToSend]=temp; 
+00134:  CLRF   03
+00136:  MOVF   36,W
+00138:  ADDLW  22
+0013A:  MOVWF  FE9
+0013C:  MOVLW  00
+0013E:  ADDWFC 03,W
+00140:  MOVWF  FEA
+00142:  MOVFF  2E,FEF
+....................          ToSend=0; 
+00146:  CLRF   36
+....................          ForceTx=TRUE; 
+00148:  BSF    35.1
+....................       } else{ 
+0014A:  BRA    0160
+....................          TxBuffer[ToSend]=temp; 
+0014C:  CLRF   03
+0014E:  MOVF   36,W
+00150:  ADDLW  22
+00152:  MOVWF  FE9
+00154:  MOVLW  00
+00156:  ADDWFC 03,W
+00158:  MOVWF  FEA
+0015A:  MOVFF  2E,FEF
+....................          ToSend++; 
+0015E:  INCF   36,F
+....................       } 
+....................    } 
+.................... } 
+....................  
+00160:  BCF    F9E.5
+00162:  GOTO   0058
+.................... void main(){ 
+*
+00374:  CLRF   FF8
+00376:  BCF    FD0.7
+00378:  BSF    0D.7
+0037A:  CLRF   FEA
+0037C:  CLRF   FE9
+0037E:  MOVLW  62
+00380:  MOVWF  FD3
+00382:  MOVLW  40
+00384:  MOVWF  F9B
+00386:  MOVF   FD3,W
+00388:  BCF    FB8.3
+0038A:  MOVLW  19
+0038C:  MOVWF  FAF
+0038E:  MOVLW  A6
+00390:  MOVWF  FAC
+00392:  MOVLW  90
+00394:  MOVWF  FAB
+00396:  MOVF   FC1,W
+00398:  ANDLW  C0
+0039A:  IORLW  0F
+0039C:  MOVWF  FC1
+0039E:  MOVLW  07
+003A0:  MOVWF  FB4
+003A2:  CLRF   2C
+003A4:  CLRF   2D
+003A6:  CLRF   2E
+003A8:  CLRF   2F
+003AA:  CLRF   30
+003AC:  CLRF   31
+003AE:  CLRF   32
+003B0:  CLRF   33
+003B2:  CLRF   34
+003B4:  BCF    35.0
+003B6:  BCF    35.1
+003B8:  CLRF   36
+....................  
+....................    setup_oscillator(OSC_16MHZ); 
+003BA:  MOVLW  60
+003BC:  MOVWF  FD3
+003BE:  MOVLW  40
+003C0:  MOVWF  F9B
+003C2:  MOVF   FD3,W
+....................  
+....................    setup_spi(SPI_MASTER|SPI_L_TO_H|SPI_CLK_DIV_4); // SCLK @ 4MHz 
+003C4:  BCF    FC6.5
+003C6:  BCF    F94.5
+003C8:  BSF    F94.4
+003CA:  BCF    F94.3
+003CC:  MOVLW  20
+003CE:  MOVWF  FC6
+003D0:  MOVLW  00
+003D2:  MOVWF  FC7
+....................    *SSPSTAT |= 0x40; 
+003D4:  BSF    FC7.6
+....................    output_high(CSn); 
+003D6:  BCF    F94.2
+003D8:  BSF    F8B.2
+....................    setup_wdt(WDT_ON); 
+003DA:  BSF    FD1.0
+....................  
+....................    SendStrobe(SRES); 
+003DC:  MOVLW  30
+003DE:  MOVWF  37
+003E0:  RCALL  0166
+....................    CCBurstConfig();    
+003E2:  BRA    01CC
+....................    //InitInfos();      
+....................    CalibrationRoutine(); 
+003E4:  BRA    032E
+....................    Blink(); 
+003E6:  RCALL  01A2
+....................     
+....................    SetRegister(_PKTCTRL1,0x08);// No Status 
+003E8:  MOVLW  07
+003EA:  MOVWF  37
+003EC:  MOVLW  08
+003EE:  MOVWF  38
+003F0:  RCALL  0352
+....................    SetRegister(_PKTCTRL0,0x04);// Fixed length 
+003F2:  MOVLW  08
+003F4:  MOVWF  37
+003F6:  MOVLW  04
+003F8:  MOVWF  38
+003FA:  RCALL  0352
+....................    SetRegister(_PKTLEN,0x05); 
+003FC:  MOVLW  06
+003FE:  MOVWF  37
+00400:  MOVLW  05
+00402:  MOVWF  38
+00404:  RCALL  0352
+....................    SetRegister(_MCSM1,0x30);// OFF to Rx 
+00406:  MOVLW  17
+00408:  MOVWF  37
+0040A:  MOVLW  30
+0040C:  MOVWF  38
+0040E:  RCALL  0352
+....................    SetRegister(_MCSM0,0x08);// AutoCal Idle to Tx o Rx 
+00410:  MOVLW  18
+00412:  MOVWF  37
+00414:  MOVLW  08
+00416:  MOVWF  38
+00418:  RCALL  0352
+....................    SetRegister(PATABLE, 0x0F); // -20 dBm 
+0041A:  MOVLW  3E
+0041C:  MOVWF  37
+0041E:  MOVLW  0F
+00420:  MOVWF  38
+00422:  RCALL  0352
+....................     
+....................    enable_interrupts(INT_RDA); 
+00424:  BSF    F9D.5
+....................    enable_interrupts(GLOBAL); 
+00426:  MOVLW  C0
+00428:  IORWF  FF2,F
+....................  
+....................    while(TRUE){ 
+....................        
+....................       restart_wdt(); 
+0042A:  CLRWDT
+....................  
+....................       // RICEZIONE 
+....................       //**************************************************** 
+....................       if(ForceTx==FALSE){ 
+0042C:  BTFSC  35.1
+0042E:  BRA    05EC
+....................          CheckStatus(); 
+00430:  RCALL  02C4
+....................          //PrintStatus(); 
+....................          if(MARCS!=13 || MARCS!=14 || MARCS!=15) SendStrobe(SRX); 
+00432:  MOVF   30,W
+00434:  SUBLW  0D
+00436:  BNZ   0444
+00438:  MOVF   30,W
+0043A:  SUBLW  0E
+0043C:  BNZ   0444
+0043E:  MOVF   30,W
+00440:  SUBLW  0F
+00442:  BZ    044A
+00444:  MOVLW  34
+00446:  MOVWF  37
+00448:  RCALL  0166
+....................          if(MARCS==17) SendStrobe(SFRX); 
+0044A:  MOVF   30,W
+0044C:  SUBLW  11
+0044E:  BNZ   0456
+00450:  MOVLW  3A
+00452:  MOVWF  37
+00454:  RCALL  0166
+....................          if(CRC_Ok){ 
+00456:  BTFSS  35.0
+00458:  BRA    05EC
+....................             output_high(RxLed); 
+0045A:  BCF    F93.1
+0045C:  BSF    F8A.1
+....................             //delay_us(1000); 
+....................             output_low(CSn); 
+0045E:  BCF    F94.2
+00460:  BCF    F8B.2
+....................             spi_write(RXFIFO|RdBt); 
+00462:  MOVF   FC9,W
+00464:  MOVLW  FF
+00466:  MOVWF  FC9
+00468:  BTFSS  FC7.0
+0046A:  BRA    0468
+....................             FirstByte = spi_read(0); 
+0046C:  MOVF   FC9,W
+0046E:  CLRF   FC9
+00470:  BTFSS  FC7.0
+00472:  BRA    0470
+00474:  MOVFF  FC9,32
+....................             switch(FirstByte){ 
+00478:  MOVF   32,W
+0047A:  XORLW  AA
+0047C:  BZ    0494
+0047E:  XORLW  C9
+00480:  BZ    04EE
+00482:  XORLW  06
+00484:  BZ    052A
+00486:  XORLW  02
+00488:  BTFSC  FD8.2
+0048A:  BRA    0566
+0048C:  XORLW  0E
+0048E:  BTFSC  FD8.2
+00490:  BRA    05A2
+00492:  BRA    05DE
+....................                case 0xAA: 
+....................                   for(j=0;j<4;j++) RxBuffer[j] = spi_read(0); 
+00494:  CLRF   2D
+00496:  MOVF   2D,W
+00498:  SUBLW  03
+0049A:  BNC   04BA
+0049C:  CLRF   03
+0049E:  MOVF   2D,W
+004A0:  ADDLW  18
+004A2:  MOVWF  FE9
+004A4:  MOVLW  00
+004A6:  ADDWFC 03,W
+004A8:  MOVWF  FEA
+004AA:  MOVF   FC9,W
+004AC:  CLRF   FC9
+004AE:  BTFSS  FC7.0
+004B0:  BRA    04AE
+004B2:  MOVFF  FC9,FEF
+004B6:  INCF   2D,F
+004B8:  BRA    0496
+....................                   output_high(CSn); 
+004BA:  BCF    F94.2
+004BC:  BSF    F8B.2
+....................                   putc(0xAA); 
+004BE:  MOVLW  AA
+004C0:  BTFSS  F9E.4
+004C2:  BRA    04C0
+004C4:  MOVWF  FAD
+....................                   for(j=0;j<4;j++) putc(RxBuffer[j]); 
+004C6:  CLRF   2D
+004C8:  MOVF   2D,W
+004CA:  SUBLW  03
+004CC:  BNC   04EC
+004CE:  CLRF   03
+004D0:  MOVF   2D,W
+004D2:  ADDLW  18
+004D4:  MOVWF  FE9
+004D6:  MOVLW  00
+004D8:  ADDWFC 03,W
+004DA:  MOVWF  FEA
+004DC:  MOVFF  FEF,37
+004E0:  MOVF   37,W
+004E2:  BTFSS  F9E.4
+004E4:  BRA    04E2
+004E6:  MOVWF  FAD
+004E8:  INCF   2D,F
+004EA:  BRA    04C8
+....................                   break; 
+004EC:  BRA    05E4
+....................                case 0x63: 
+....................                   for(j=0;j<4;j++) RxBuffer[j] = spi_read(0); 
+004EE:  CLRF   2D
+004F0:  MOVF   2D,W
+004F2:  SUBLW  03
+004F4:  BNC   0514
+004F6:  CLRF   03
+004F8:  MOVF   2D,W
+004FA:  ADDLW  18
+004FC:  MOVWF  FE9
+004FE:  MOVLW  00
+00500:  ADDWFC 03,W
+00502:  MOVWF  FEA
+00504:  MOVF   FC9,W
+00506:  CLRF   FC9
+00508:  BTFSS  FC7.0
+0050A:  BRA    0508
+0050C:  MOVFF  FC9,FEF
+00510:  INCF   2D,F
+00512:  BRA    04F0
+....................                   output_high(CSn); 
+00514:  BCF    F94.2
+00516:  BSF    F8B.2
+....................                   putc(0x63); 
+00518:  MOVLW  63
+0051A:  BTFSS  F9E.4
+0051C:  BRA    051A
+0051E:  MOVWF  FAD
+....................                   putc(RxBuffer[0]); 
+00520:  MOVF   18,W
+00522:  BTFSS  F9E.4
+00524:  BRA    0522
+00526:  MOVWF  FAD
+....................                   break; 
+00528:  BRA    05E4
+....................                case 0x65: 
+....................                   for(j=0;j<4;j++) RxBuffer[j] = spi_read(0); 
+0052A:  CLRF   2D
+0052C:  MOVF   2D,W
+0052E:  SUBLW  03
+00530:  BNC   0550
+00532:  CLRF   03
+00534:  MOVF   2D,W
+00536:  ADDLW  18
+00538:  MOVWF  FE9
+0053A:  MOVLW  00
+0053C:  ADDWFC 03,W
+0053E:  MOVWF  FEA
+00540:  MOVF   FC9,W
+00542:  CLRF   FC9
+00544:  BTFSS  FC7.0
+00546:  BRA    0544
+00548:  MOVFF  FC9,FEF
+0054C:  INCF   2D,F
+0054E:  BRA    052C
+....................                   output_high(CSn); 
+00550:  BCF    F94.2
+00552:  BSF    F8B.2
+....................                   putc(0x65); 
+00554:  MOVLW  65
+00556:  BTFSS  F9E.4
+00558:  BRA    0556
+0055A:  MOVWF  FAD
+....................                   putc(RxBuffer[0]); 
+0055C:  MOVF   18,W
+0055E:  BTFSS  F9E.4
+00560:  BRA    055E
+00562:  MOVWF  FAD
+....................                   break; 
+00564:  BRA    05E4
+....................                case 0x67: 
+....................                   for(j=0;j<4;j++) RxBuffer[j] = spi_read(0); 
+00566:  CLRF   2D
+00568:  MOVF   2D,W
+0056A:  SUBLW  03
+0056C:  BNC   058C
+0056E:  CLRF   03
+00570:  MOVF   2D,W
+00572:  ADDLW  18
+00574:  MOVWF  FE9
+00576:  MOVLW  00
+00578:  ADDWFC 03,W
+0057A:  MOVWF  FEA
+0057C:  MOVF   FC9,W
+0057E:  CLRF   FC9
+00580:  BTFSS  FC7.0
+00582:  BRA    0580
+00584:  MOVFF  FC9,FEF
+00588:  INCF   2D,F
+0058A:  BRA    0568
+....................                   output_high(CSn); 
+0058C:  BCF    F94.2
+0058E:  BSF    F8B.2
+....................                   putc(0x67); 
+00590:  MOVLW  67
+00592:  BTFSS  F9E.4
+00594:  BRA    0592
+00596:  MOVWF  FAD
+....................                   putc(RxBuffer[0]); 
+00598:  MOVF   18,W
+0059A:  BTFSS  F9E.4
+0059C:  BRA    059A
+0059E:  MOVWF  FAD
+....................                   break; 
+005A0:  BRA    05E4
+....................                case 0x69: 
+....................                   for(j=0;j<4;j++) RxBuffer[j] = spi_read(0); 
+005A2:  CLRF   2D
+005A4:  MOVF   2D,W
+005A6:  SUBLW  03
+005A8:  BNC   05C8
+005AA:  CLRF   03
+005AC:  MOVF   2D,W
+005AE:  ADDLW  18
+005B0:  MOVWF  FE9
+005B2:  MOVLW  00
+005B4:  ADDWFC 03,W
+005B6:  MOVWF  FEA
+005B8:  MOVF   FC9,W
+005BA:  CLRF   FC9
+005BC:  BTFSS  FC7.0
+005BE:  BRA    05BC
+005C0:  MOVFF  FC9,FEF
+005C4:  INCF   2D,F
+005C6:  BRA    05A4
+....................                   output_high(CSn); 
+005C8:  BCF    F94.2
+005CA:  BSF    F8B.2
+....................                   putc(0x69); 
+005CC:  MOVLW  69
+005CE:  BTFSS  F9E.4
+005D0:  BRA    05CE
+005D2:  MOVWF  FAD
+....................                   putc(RxBuffer[0]); 
+005D4:  MOVF   18,W
+005D6:  BTFSS  F9E.4
+005D8:  BRA    05D6
+005DA:  MOVWF  FAD
+....................                   break; 
+005DC:  BRA    05E4
+....................                default: 
+....................                   output_high(CSn); 
+005DE:  BCF    F94.2
+005E0:  BSF    F8B.2
+....................                   break; 
+005E2:  BRA    05E4
+....................             } 
+....................             output_low(RxLed); 
+005E4:  BCF    F93.1
+005E6:  BCF    F8A.1
+....................             ToSend=0; 
+005E8:  CLRF   36
+....................             ForceTx=FALSE; 
+005EA:  BCF    35.1
+....................             //CheckStatus(); 
+....................             //PrintStatus(); 
+....................          }   
+....................       } 
+....................       
+....................       // TRASMISSIONE 
+....................       //**************************************************** 
+....................  
+....................       if(ForceTx==TRUE){ 
+005EC:  BTFSS  35.1
+005EE:  BRA    066A
+....................          //Blink(); 
+....................          output_high(TxLed); 
+005F0:  BCF    F93.0
+005F2:  BSF    F8A.0
+....................          SendStrobe(STX); 
+005F4:  MOVLW  35
+005F6:  MOVWF  37
+005F8:  RCALL  0166
+....................          output_low(CSn); 
+005FA:  BCF    F94.2
+005FC:  BCF    F8B.2
+....................          spi_write(TXFIFO|WrBt); 
+005FE:  MOVF   FC9,W
+00600:  MOVLW  7F
+00602:  MOVWF  FC9
+00604:  BTFSS  FC7.0
+00606:  BRA    0604
+....................          for(i=0; i<5; i++) spi_write(TxBuffer[i]); 
+00608:  CLRF   2C
+0060A:  MOVF   2C,W
+0060C:  SUBLW  04
+0060E:  BNC   0630
+00610:  CLRF   03
+00612:  MOVF   2C,W
+00614:  ADDLW  22
+00616:  MOVWF  FE9
+00618:  MOVLW  00
+0061A:  ADDWFC 03,W
+0061C:  MOVWF  FEA
+0061E:  MOVFF  FEF,37
+00622:  MOVF   FC9,W
+00624:  MOVFF  37,FC9
+00628:  BTFSS  FC7.0
+0062A:  BRA    0628
+0062C:  INCF   2C,F
+0062E:  BRA    060A
+....................          output_high(CSn); 
+00630:  BCF    F94.2
+00632:  BSF    F8B.2
+....................          //SendStrobe(STX); 
+....................          do{CheckStatus();/*PrintStatus();*/} while(MARCS==19); 
+00634:  RCALL  02C4
+00636:  MOVF   30,W
+00638:  SUBLW  13
+0063A:  BZ    0634
+....................          if(MARCS==22) SendStrobe(SFTX); 
+0063C:  MOVF   30,W
+0063E:  SUBLW  16
+00640:  BNZ   0648
+00642:  MOVLW  3B
+00644:  MOVWF  37
+00646:  RCALL  0166
+....................          for(i=0; i<5; i++) TxBuffer[i]=0; 
+00648:  CLRF   2C
+0064A:  MOVF   2C,W
+0064C:  SUBLW  04
+0064E:  BNC   0664
+00650:  CLRF   03
+00652:  MOVF   2C,W
+00654:  ADDLW  22
+00656:  MOVWF  FE9
+00658:  MOVLW  00
+0065A:  ADDWFC 03,W
+0065C:  MOVWF  FEA
+0065E:  CLRF   FEF
+00660:  INCF   2C,F
+00662:  BRA    064A
+....................          ForceTx=FALSE; 
+00664:  BCF    35.1
+....................          output_low(TxLed); 
+00666:  BCF    F93.0
+00668:  BCF    F8A.0
+....................       } 
+....................        
+....................        
+....................    } 
+0066A:  BRA    042A
+.................... } 
+....................  
+.................... void Blink(){ 
+....................    for(i=0; i<10; i++){ 
+*
+001A2:  CLRF   2C
+001A4:  MOVF   2C,W
+001A6:  SUBLW  09
+001A8:  BNC   01CA
+*
+0066C:  SLEEP 
+....................    output_high(TxLed); 
+*
+001AA:  BCF    F93.0
+001AC:  BSF    F8A.0
+....................    output_high(RxLed); 
+001AE:  BCF    F93.1
+001B0:  BSF    F8A.1
+....................    delay_ms(100); 
+001B2:  MOVLW  64
+001B4:  MOVWF  66
+001B6:  RCALL  017A
+....................    output_low(TxLed); 
+001B8:  BCF    F93.0
+001BA:  BCF    F8A.0
+....................    output_low(RxLed); 
+001BC:  BCF    F93.1
+001BE:  BCF    F8A.1
+....................    delay_ms(100); 
+001C0:  MOVLW  64
+001C2:  MOVWF  66
+001C4:  RCALL  017A
+....................    } 
+001C6:  INCF   2C,F
+001C8:  BRA    01A4
+.................... } 
+001CA:  RETLW  00
+....................  
+.................... void CCBurstConfig(){ 
+....................    char ConfReg[47] = {IOCFG2, IOCFG1, IOCFG0, FIFOTHR, SYNC1, SYNC0, PKTLEN, PKTCTRL1, PKTCTRL0, ADDR, CHANNR, FSCTRL1, FSCTRL0, FREQ2, FREQ1, FREQ0, MDMCFG4, MDMCFG3, MDMCFG2, MDMCFG1, MDMCFG0, DEVIATN, MCSM2, MCSM1, MCSM0, FOCCFG, BSCFG, AGCCTRL2, AGCCTRL1, AGCCTRL0, WOREVT1, WOREVT0, WORCTRL, FREND1, FREND0, FSCAL3, FSCAL2, FSCAL1, FSCAL0, RCCTRL1, RCCTRL0, FSTEST, PTEST, AGCTEST, TEST2, TEST1, TEST0}; 
+001CC:  MOVLW  29
+001CE:  MOVWF  37
+001D0:  MOVLW  2E
+001D2:  MOVWF  38
+001D4:  MOVLW  06
+001D6:  MOVWF  39
+001D8:  MOVLW  07
+001DA:  MOVWF  3A
+001DC:  MOVLW  D3
+001DE:  MOVWF  3B
+001E0:  MOVLW  91
+001E2:  MOVWF  3C
+001E4:  MOVLW  FF
+001E6:  MOVWF  3D
+001E8:  MOVLW  0C
+001EA:  MOVWF  3E
+001EC:  MOVLW  05
+001EE:  MOVWF  3F
+001F0:  CLRF   40
+001F2:  CLRF   41
+001F4:  MOVLW  0C
+001F6:  MOVWF  42
+001F8:  CLRF   43
+001FA:  MOVLW  21
+001FC:  MOVWF  44
+001FE:  MOVLW  65
+00200:  MOVWF  45
+00202:  MOVLW  6A
+00204:  MOVWF  46
+00206:  MOVLW  2D
+00208:  MOVWF  47
+0020A:  MOVLW  3B
+0020C:  MOVWF  48
+0020E:  MOVLW  13
+00210:  MOVWF  49
+00212:  MOVLW  22
+00214:  MOVWF  4A
+00216:  MOVLW  F8
+00218:  MOVWF  4B
+0021A:  MOVLW  62
+0021C:  MOVWF  4C
+0021E:  MOVLW  07
+00220:  MOVWF  4D
+00222:  MOVLW  30
+00224:  MOVWF  4E
+00226:  MOVLW  18
+00228:  MOVWF  4F
+0022A:  MOVLW  1D
+0022C:  MOVWF  50
+0022E:  MOVLW  1C
+00230:  MOVWF  51
+00232:  MOVLW  C7
+00234:  MOVWF  52
+00236:  CLRF   53
+00238:  MOVLW  B0
+0023A:  MOVWF  54
+0023C:  MOVLW  87
+0023E:  MOVWF  55
+00240:  MOVLW  6B
+00242:  MOVWF  56
+00244:  MOVLW  F8
+00246:  MOVWF  57
+00248:  MOVLW  B6
+0024A:  MOVWF  58
+0024C:  MOVLW  10
+0024E:  MOVWF  59
+00250:  MOVLW  EA
+00252:  MOVWF  5A
+00254:  MOVLW  2A
+00256:  MOVWF  5B
+00258:  CLRF   5C
+0025A:  MOVLW  1F
+0025C:  MOVWF  5D
+0025E:  MOVLW  41
+00260:  MOVWF  5E
+00262:  CLRF   5F
+00264:  MOVLW  59
+00266:  MOVWF  60
+00268:  MOVLW  7F
+0026A:  MOVWF  61
+0026C:  MOVLW  3F
+0026E:  MOVWF  62
+00270:  MOVLW  88
+00272:  MOVWF  63
+00274:  MOVLW  31
+00276:  MOVWF  64
+00278:  MOVLW  09
+0027A:  MOVWF  65
+....................    output_low(CSn); 
+0027C:  BCF    F94.2
+0027E:  BCF    F8B.2
+....................    while(input(GDO2)) Blink(); 
+00280:  BSF    F94.1
+00282:  BTFSS  F82.1
+00284:  BRA    028A
+00286:  RCALL  01A2
+00288:  BRA    0280
+....................    spi_write(0x00 | WrBt);  
+0028A:  MOVF   FC9,W
+0028C:  MOVLW  40
+0028E:  MOVWF  FC9
+00290:  BTFSS  FC7.0
+00292:  BRA    0290
+....................    for (i=0; i<47; i++){ 
+00294:  CLRF   2C
+00296:  MOVF   2C,W
+00298:  SUBLW  2E
+0029A:  BNC   02BC
+....................       spi_write(ConfReg[i]); 
+0029C:  CLRF   03
+0029E:  MOVF   2C,W
+002A0:  ADDLW  37
+002A2:  MOVWF  FE9
+002A4:  MOVLW  00
+002A6:  ADDWFC 03,W
+002A8:  MOVWF  FEA
+002AA:  MOVFF  FEF,66
+002AE:  MOVF   FC9,W
+002B0:  MOVFF  66,FC9
+002B4:  BTFSS  FC7.0
+002B6:  BRA    02B4
+....................    } 
+002B8:  INCF   2C,F
+002BA:  BRA    0296
+....................    output_high(CSn); 
+002BC:  BCF    F94.2
+002BE:  BSF    F8B.2
+.................... } 
+002C0:  GOTO   03E4 (RETURN)
+....................  
+.................... void InitInfos(){ 
+....................    char ReadRegs[0x30]; 
+....................    output_low(CSn); 
+....................    spi_write(0x00|RdBt); 
+....................    for(i=0; i<0x30; i++) ReadRegs[i] = spi_read(0); 
+....................    output_high(CSn); 
+....................    printf("\n\r***************************************************************************\n\r"); 
+....................    for(i=0; i<0x30; i++) printf("%X=%X\t", i, ReadRegs[i] ); 
+....................    printf("\n\r***************************************************************************\n\r"); 
+.................... } 
+....................  
+.................... void CheckStatus(){ // circa 10us 
+....................    output_low(CSn); 
+002C4:  BCF    F94.2
+002C6:  BCF    F8B.2
+....................    spi_write(PKTSTATUS); 
+002C8:  MOVF   FC9,W
+002CA:  MOVLW  F8
+002CC:  MOVWF  FC9
+002CE:  BTFSS  FC7.0
+002D0:  BRA    02CE
+....................    PacketStatus = spi_read(PKTSTATUS); 
+002D2:  MOVF   FC9,W
+002D4:  MOVLW  F8
+002D6:  MOVWF  FC9
+002D8:  BTFSS  FC7.0
+002DA:  BRA    02D8
+002DC:  MOVFF  FC9,2F
+....................    spi_write(MARCSTATE); 
+002E0:  MOVF   FC9,W
+002E2:  MOVLW  F5
+002E4:  MOVWF  FC9
+002E6:  BTFSS  FC7.0
+002E8:  BRA    02E6
+....................    MARCS = spi_read(0); 
+002EA:  MOVF   FC9,W
+002EC:  CLRF   FC9
+002EE:  BTFSS  FC7.0
+002F0:  BRA    02EE
+002F2:  MOVFF  FC9,30
+....................    spi_write(TXBYTES); 
+002F6:  MOVF   FC9,W
+002F8:  MOVLW  FA
+002FA:  MOVWF  FC9
+002FC:  BTFSS  FC7.0
+002FE:  BRA    02FC
+....................    TxFIFOBytes = spi_read(0); 
+00300:  MOVF   FC9,W
+00302:  CLRF   FC9
+00304:  BTFSS  FC7.0
+00306:  BRA    0304
+00308:  MOVFF  FC9,33
+....................    spi_write(RXBYTES); 
+0030C:  MOVF   FC9,W
+0030E:  MOVLW  FB
+00310:  MOVWF  FC9
+00312:  BTFSS  FC7.0
+00314:  BRA    0312
+....................    RxFIFOBytes = spi_read(0); 
+00316:  MOVF   FC9,W
+00318:  CLRF   FC9
+0031A:  BTFSS  FC7.0
+0031C:  BRA    031A
+0031E:  MOVFF  FC9,34
+....................    output_high(CSn); 
+00322:  BCF    F94.2
+00324:  BSF    F8B.2
+....................    CRC_Ok = bit_test(PacketStatus,7); 
+00326:  BCF    35.0
+00328:  BTFSC  2F.7
+0032A:  BSF    35.0
+.................... } 
+0032C:  RETLW  00
+....................  
+.................... void PrintStatus(){ 
+....................    printf("\n\rMARCSTATE = %d, PACKETSTATUS = %X, TXFIFO = %d, RXFIFO = %d", MARCS, PacketStatus,TxFIFOBytes, RxFIFOBytes); 
+.................... } 
+....................  
+.................... void CalibrationRoutine(){ 
+....................    CheckStatus(); 
+0032E:  RCALL  02C4
+....................    if(MARCS!=1){ 
+00330:  DECFSZ 30,W
+00332:  BRA    0336
+00334:  BRA    0342
+....................       SendStrobe(SIDLE); 
+00336:  MOVLW  36
+00338:  MOVWF  37
+0033A:  RCALL  0166
+....................       delay_ms(1); 
+0033C:  MOVLW  01
+0033E:  MOVWF  66
+00340:  RCALL  017A
+....................    } 
+....................    SendStrobe(SCAL); 
+00342:  MOVLW  33
+00344:  MOVWF  37
+00346:  RCALL  0166
+....................    delay_ms(1); 
+00348:  MOVLW  01
+0034A:  MOVWF  66
+0034C:  RCALL  017A
+.................... } 
+0034E:  GOTO   03E6 (RETURN)
+....................  
+.................... void SendStrobe(char Strobe){ 
+....................    output_low(CSn); 
+*
+00166:  BCF    F94.2
+00168:  BCF    F8B.2
+....................    spi_write(Strobe); 
+0016A:  MOVF   FC9,W
+0016C:  MOVFF  37,FC9
+00170:  BTFSS  FC7.0
+00172:  BRA    0170
+....................    output_high(CSn); 
+00174:  BCF    F94.2
+00176:  BSF    F8B.2
+.................... } 
+00178:  RETLW  00
+....................  
+.................... void SetRegister(char Address, char Value){ 
+....................    output_low(CSn); 
+*
+00352:  BCF    F94.2
+00354:  BCF    F8B.2
+....................    spi_write(Address|WrSg); 
+00356:  MOVFF  37,39
+0035A:  MOVF   FC9,W
+0035C:  MOVFF  37,FC9
+00360:  BTFSS  FC7.0
+00362:  BRA    0360
+....................    spi_write(Value); 
+00364:  MOVF   FC9,W
+00366:  MOVFF  38,FC9
+0036A:  BTFSS  FC7.0
+0036C:  BRA    036A
+....................    output_high(CSn); 
+0036E:  BCF    F94.2
+00370:  BSF    F8B.2
+.................... }    
+00372:  RETLW  00
+
+Configuration Fuses:
+   Word  1: 0800   NOIESO INTRC_IO NOFCMEN RESERVED
+   Word  2: 1F1E   BROWNOUT WDT BORV21 PUT WDT32768
+   Word  3: 8300   CCP2C1 PBADEN NOLPT1OSC MCLR RESERVED
+   Word  4: 0081   STVREN NODEBUG NOLVP NOXINST RESERVED
+   Word  5: C00F   NOPROTECT NOCPD NOCPB
+   Word  6: E00F   NOWRT NOWRTD NOWRTC NOWRTB
+   Word  7: 400F   NOEBTR NOEBTRB

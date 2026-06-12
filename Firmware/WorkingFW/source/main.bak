@@ -1,0 +1,61 @@
+#include <18f4620.h>
+#fuses INTRC_IO,NOWDT, NOPROTECT, BROWNOUT, MCLR
+#use delay(clock=8000000)
+#use rs232( baud=9600, xmit=PIN_C6, rcv=PIN_C7, bits=8, parity=N)
+
+#define BufferLength 256
+
+#define  TxLed PIN_B0
+#define  RxLed PIN_B1
+
+char BufferTx[BufferLength], BufferRx[BufferLength];
+char BufferTxPointer, BufferRxPointer, temp;
+enum State{Tx,Rx} CurrentState, NextState;
+
+
+void Blink(){
+   char i;
+   for(i=0; i<100; i++){
+   output_high(TxLed);
+   delay_ms(100);
+   output_low(TxLed);
+   delay_ms(100);
+   }
+}
+
+#int_rda
+void RDA_isr(){
+
+   temp = getc();
+   if(temp == 0x0D) if(CurrentState == Rx) NextState = Tx;
+   BufferTxPointer %= BufferLength;
+   BufferTx[BufferTxPointer] = temp;
+   putc(temp);
+   Blink();
+
+}
+
+
+
+void main()
+{
+
+   setup_oscillator(OSC_8MHZ); 
+   enable_interrupts(INT_RDA);
+   enable_interrupts(GLOBAL);
+
+printf("Vediamo se funziona...\n\r");
+
+while(1){
+
+
+   output_high(TxLed);
+   delay_ms(1000);
+   output_high(RxLed);
+
+   printf("Ciao\n\r");
+   output_low(TxLed);
+   delay_ms(1000);
+   output_low(RxLed);
+}
+}

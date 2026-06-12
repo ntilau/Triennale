@@ -1,0 +1,74 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @SCRATCH
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018     GAIN
+019     CLUTTER_CANCELLATION
+01A     I
+01B     head
+01C-01D I
+01E-01F Q
+020-021 DataTX.I
+022-023 DataTX.Q
+024     DataTX.@SCRATCH
+025     DigPot.dato
+025     @delay_ms1.P1
+025     Leggi_RS232.@SCRATCH
+F9B.6   PLL_ENABLE
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB-FBC CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE-FBF CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+
+00AC  @delay_ms1
+00DC  Leggi_RS232
+019C  main
+0096  DigPot
+0160  DataTX
+019C  @cinit
+
+Project Files:
+    C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.c
+    C:\Documents and Settings\Lorenzo\Desktop\acquisitore\acquisitore.h
+    C:\Programmi\PICC\devices\18F2420.h
+
+Compiler Settings:
+    Processor:      PIC18F2420
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: 1,8,16
+
+Output Files:
+    Errors:      C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.err
+    INHX32:      C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.HEX
+    Symbols:     C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.SYM
+    List:        C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.LST
+    Debug/COFF:  C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.cof
+    Call Tree:   C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.tre
+    Statistics:  C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.sta

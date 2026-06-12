@@ -1,0 +1,88 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @SCRATCH
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018     @INTERRUPT_AREA
+019     GAIN
+01A     CLUTTER_CANCELLATION
+01B     I
+01C     head
+01D-01E I
+01F-020 Q
+021-022 DataTX.I
+023-024 DataTX.Q
+025     DataTX.@SCRATCH
+026     DigPot.dato
+026     @delay_ms1.P1
+026     Leggi_RS232.@SCRATCH
+F9B.6   PLL_ENABLE
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB-FBC CCP_2
+FBC     CCP_2_HIGH
+FBE-FBF CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+00B4  @delay_ms1
+00E2  Leggi_RS232
+0198  MAIN
+009E  DigPot
+0164  DataTX
+0198  @cinit
+
+Project Directory:
+    m:\TchLab\SeReD\Hardware\Acquisitore\Firmware\
+
+Project Files:
+    Acquisitore.c
+    acquisitore.h
+    C:\Programmi\PICC\devices\18F2420.h
+
+Units:
+    Acquisitore.c (main)
+
+Compiler Settings:
+    Processor:      PIC18F2420
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      Acquisitore.err
+    Ext Symbols: Acquisitore.esym
+    INHX32:      Acquisitore.hex
+    Symbols:     Acquisitore.sym
+    List:        Acquisitore.lst
+    Debug/COFF:  Acquisitore.cof
+    Project:     Acquisitore.PJT
+    Call Tree:   Acquisitore.tre
+    Statistics:  Acquisitore.sta

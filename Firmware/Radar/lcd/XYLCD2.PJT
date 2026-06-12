@@ -1,0 +1,47 @@
+[PROJECT]
+Target=XYLCD2.HEX
+Development_Mode=2
+Processor=0x4520
+ToolSuite=CCS
+Processor_Text=PIC18F4520
+
+[Directories]
+Include=
+Library=
+LinkerScript=
+
+[Target Data]
+FileList=C:\Documents and Settings\Lorenzo\Desktop\lcd\XYLCD2.c
+BuildTool=C-COMPILER
+OptionString=+FH
+AdditionalOptionString=
+BuildRequired=1
+
+[XYLCD2.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=XYLCD2.c
+
+[Windows]
+0=0000 XYLCD2.c 0 0 796 451 3 0
+
+[Opened Files]
+1=C:\Documents and Settings\Lorenzo\Desktop\lcd\XYLCD2.c
+2=C:\Documents and Settings\Lorenzo\Desktop\lcd\S1D13700.C
+3=
+4=C:\Programmi\PICC\drivers\string.h
+5=C:\Programmi\PICC\drivers\stddef.h
+6=C:\Programmi\PICC\drivers\ctype.h
+7=C:\Documents and Settings\Lorenzo\Desktop\lcd\S1D13700_1.C
+8=C:\Programmi\PICC\drivers\GRAPHICS.C
+9=C:\Documents and Settings\Lorenzo\Desktop\lcd\XYPLOT_FIRM.c
+10=
+[Units]
+Count=1
+1=XYLCD2.c (main)

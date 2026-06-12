@@ -1,0 +1,37 @@
+[PROJECT]
+Target=Acquisitore.HEX
+Development_Mode=
+Processor=0x2420
+ToolSuite=CCS
+
+[Directories]
+Include=C:\Programmi\PICC\devices\;C:\Programmi\PICC\drivers\
+Library=
+LinkerScript=
+
+[Target Data]
+FileList=Acquisitore.c;
+BuildTool=C-COMPILER
+OptionString=+FH
+AdditionalOptionString=
+BuildRequired=1
+
+[Acquisitore.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=Acquisitore.c
+
+[Windows]
+0=0000 Acquisitore.c 0 0 796 451 3 0
+
+[Opened Files]
+1=C:\Documents and Settings\Lorenzo\Desktop\acquisitore\Acquisitore.c
+2=
+3=C:\Programmi\PICC\devices\18F2520.h
+4=

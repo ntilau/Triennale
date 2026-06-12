@@ -1,0 +1,96 @@
+
+ROM used: 12090 (37%)
+          12090 (37%) including unused fragments
+
+          6 Average locations per line
+          22 Average locations per statement
+
+RAM used: 1196 (78%) at main() level
+          1254 (82%) worst case
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  547   237  43  C:\Documents and Settings\Lorenzo\Desktop\lcd\XYLCD2.c
+    6     0   0  C:\Documents and Settings\Lorenzo\Desktop\lcd\XYLCD2.h
+  416     0   0  C:\Programmi\PICC\devices\18F4520.h
+  498   114  14  C:\Documents and Settings\Lorenzo\Desktop\lcd\S1D13700_1.C
+  556   167  19  C:\Programmi\PICC\drivers\GRAPHICS.C
+   66    32   3  C:\Documents and Settings\Lorenzo\Desktop\lcd\XYPLOT_FIRM.c
+----- -----
+ 4178  1100 Total
+
+Page ROM  %  RAM  Functions:
+---- --- --- ---  ----------
+0     50   0   1  @delay_ms1
+0     42   0   1  @delay_us1
+0     82   0   1  glcd_init
+0    204   1  10  glcd_pixel
+0     34   0   5  @MUL1616
+0     96   0   0  glcd_systemSetup
+0    128   1   0  glcd_scrollSetup
+0     28   0   0  glcd_overlaySetup
+0     42   0   1  glcd_power
+0     10   0   1  glcd_cursorDirection
+0     40   0   3  glcd_cursorForm
+0     86   0   5  glcd_fillScreen
+0     68   0   3  glcd_fillScreenText
+0     32   0   1  glcd_sendByte
+0     44   0   1  glcd_readByte
+0     60   0   3  setCursorAddress
+0     32   0   2  getData
+0     34   0   3  setData
+0     12   0   1  glcd_sendCMD
+0    282   1   0  @const77
+0    246   1   0  @const80
+0    548   2  23  glcd_line
+0    352   1  10  glcd_rect
+0    510   2  24  glcd_text57
+0     48   0   5  cursore
+0    312   1   2  griglia
+0    426   2   2  Rett
+0    502   2   4  Batteria
+0     56   0   2  @ITOF
+0    356   1  14  @DIVFF
+0     32   0   1  @SPRINTF
+0    760   3  18  @PRINTF_F_539
+0    638   3  16  @ADDFF
+0    248   1  11  @MULFF
+0     62   0   4  @SFTOI
+0     34   0   0  @const10600
+0     32   0   0  @const10604
+0    336   1   2  NULL_OFFSET
+0     28   0   0  @const10612
+0     86   0   5  Leggi
+0    224   1   2  SOPPRESSIONE
+0     36   0   0  @const10639
+0     34   0   0  @const10646
+0    674   3   8  Guadagno
+0     32   0   0  @const10656
+0    122   1   6  @DIVS1616
+0    232   1   9  @PRINTF_LD_539
+0    306   1   2  REDRAW_DISPLAY
+0     34   0   0  @const10692
+0     38   0   0  @const10697
+0     32   0   0  @const10702
+0     38   0   0  @const10706
+0     18   0   0  SWITCH_DISPLAY_MODE
+0     20   0   0  TEST_SOPPRESSIONE
+0    130   1   4  Test_Guadagno
+0    342   1   1  Reset_cmd
+0     44   0   0  @const10751
+0    296   1   1  RS232_TEST
+0     36   0   0  @const10766
+0     36   0   0  @const10774
+0   2016   8   5  main
+0     38   0   0  @const10840
+0     36   0   0  @const10849
+0     40   0   0  @const10858
+0     72   0   5  @DIV1616
+
+ Segment   Used  Free
+---------  ----  ----
+00000-00002     4  0
+00004-00006     0  4
+00008-00094   142  0
+00096-07FFE  11944  20674
+

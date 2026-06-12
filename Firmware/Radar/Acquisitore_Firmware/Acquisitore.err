@@ -1,0 +1,5 @@
+>>> Warning 208 "Acquisitore.c" Line 13(1,12): Function not void and does not return a value  Leggi_RS232
+>>> Warning 203 "Acquisitore.c" Line 108(1,1): Condition always TRUE
+>>> Warning 216 "Acquisitore.c" Line 146(0,1): Interrupts disabled during call to prevent re-entrancy:  (@delay_ms1)
+      Memory usage:   ROM=4%      RAM=4% - 5%
+      0 Errors,  3 Warnings.

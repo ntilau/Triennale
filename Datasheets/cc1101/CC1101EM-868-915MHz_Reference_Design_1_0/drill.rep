@@ -1,0 +1,36 @@
+
+ [<None>] :: [Drill Drawing] :: [drill.col] :: [Photo Plotter] :: [ext_gerber.usr] :: [Photoplot_art.sel] :: [drill.spl] 
+
+
+Drill Report
+------------
+
+      Size    Letter     Count
+      ----    ------     -----
+     10.00         @       163
+     14.00         K         5
+     20.00         L         2
+     55.00         J         4
+
+
+Symbol Availability Report
+--------------------------
+
+Position    Shape          Usage           Size    Orient        Length     Count
+--------    -----          -----           ----    ------        ------     -----
+
+Predefined Symbols
+------------------
+
+
+Auto Allocated Symbols
+----------------------
+
+11          CIRCLE         Drawn           1.00                                  
+12          ANNULUS        Flashed        60.00                   20.00       174
+13          CIRCLE         Drawn           5.00                                  
+14          CIRCLE         Drawn           8.00                                  
+
+
+Row completed successfully.
+

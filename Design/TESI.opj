@@ -1,0 +1,178 @@
+(ExpressProject "TESI"
+  (ProjectVersion "19981106")
+  (ProjectType "PCB")
+  (Folder "Design Resources"
+    (Folder "Library"
+      (File "C:\Programmi\Orcad\Capture\Library\Custom\TesiTriennio.olb"
+        (Type "Schematic Library")))
+    (NoModify)
+    (File ".\tesi.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (Netlist_TAB "5")
+    (LAYOUT_Netlist_File "TESI.MNL")
+    (LAYOUT_PCB_Footprint "{PCB Footprint}")
+    (TRUE)
+    (LAYOUT_Units "0")
+    (FALSE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (FALSE)
+    (FALSE)
+    (TRUE)
+    (FALSE)
+    (TRUE)
+    (TRUE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (FALSE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE)
+    (TRUE))
+  (Folder "Outputs"
+    (File ".\tesi.mnl"
+      (Type "LAYOUT Netlist File")))
+  (Folder "Referenced Projects")
+  (PartMRUSelector
+    ("CONN PCB 6-R"
+      (FullPartName "CONN PCB 6-R.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("CONN DSUB 9-P"
+      (FullPartName "CONN DSUB 9-P.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("HEADER 1"
+      (FullPartName "HEADER 1.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("HEADER 10x2/SM"
+      (FullPartName "HEADER 10x2/SM.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("CONN SOCKET 10x2/SM"
+      (FullPartName "CONN SOCKET 10x2/SM.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("CONN SOCKET 10x2"
+      (FullPartName "CONN SOCKET 10x2.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (MTFM_SFM_6_35mm
+      (FullPartName "MTFM_SFM_6_35mm.Normal")
+      (LibraryName
+         "C:\DOCUMENTS AND SETTINGS\LORENZO\DESKTOP\TESI\DESIGN\ORCAD\TFM_SFM.OLB")
+      (DeviceIndex "0"))
+    ("CONN DSUB 9-S"
+      (FullPartName "CONN DSUB 9-S.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (PIC18F4620
+      (FullPartName "PIC18F4620.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CUSTOM\TESITRIENNIO.OLB")
+      (DeviceIndex "0"))
+    (GND
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (VCC
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (C
+      (FullPartName "C.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    (R
+      (FullPartName "R.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    (MAX3232_SMD
+      (FullPartName "MAX3232_SMD.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CUSTOM\TESITRIENNIO.OLB")
+      (DeviceIndex "0"))
+    (LP38692
+      (FullPartName "LP38692.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CUSTOM\TESITRIENNIO.OLB")
+      (DeviceIndex "0"))
+    (FUSE
+      (FullPartName "FUSE.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    ("CONN PCB 5"
+      (FullPartName "CONN PCB 5.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("CONN PCB 2"
+      (FullPartName "CONN PCB 2.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("CONN PCB 7"
+      (FullPartName "CONN PCB 7.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (DIODE
+      (FullPartName "DIODE.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    (MAX604
+      (FullPartName "MAX604.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CUSTOM\TESITRIENNIO.OLB")
+      (DeviceIndex "0"))
+    (MAX3232
+      (FullPartName "MAX3232.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\CUSTOM\TESITRIENNIO.OLB")
+      (DeviceIndex "0"))
+    (LED
+      (FullPartName "LED.Normal")
+      (LibraryName "C:\PROGRAMMI\ORCAD\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    ("CONN PCB 6"
+      (FullPartName "CONN PCB 6.Normal")
+      (LibraryName "C:\ORCAD\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("CAP POL"
+      (FullPartName "CAP POL.Normal")
+      (LibraryName "C:\ORCAD\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0")))
+  (LastUsedLibraryBrowseDirectory
+     "C:\Documents and Settings\Lorenzo\Desktop\TESI\design\ORCAD")
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Design Resources" "Library")
+      (Path "Design Resources" "Library"
+         "C:\Programmi\Orcad\Capture\Library\Custom\TesiTriennio.olb")
+      (Path "Outputs")
+      (Select "Design Resources" "Library"
+         "C:\Programmi\Orcad\Capture\Library\Custom\TesiTriennio.olb"
+         "PIC18F4620"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 320 615 -4 -23 -4 307 1 521"))
+      (Tab 0))))
